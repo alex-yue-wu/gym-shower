@@ -10,10 +10,10 @@ class ShowerEnv(Env):
         self.action_space = Discrete(3)
         # Temperature array
         self.observation_space = Box(low=np.array(
-            [0]), high=np.array([100]), dtype=np.int32)
+            [0]), high=np.array([100]), dtype=np.float64)
         # Set start temp
         self.state = 38 + random.randint(-3, 3)
-        self.state = np.array([self.state], dtype='int32')  # 1d-array
+        self.state = np.array([self.state], dtype='float64')  # 1d-array
         # Set shower length
         self.shower_length = 60
         # optimum temperature for info
@@ -31,7 +31,7 @@ class ShowerEnv(Env):
         # 1 -1 = 0
         # 2 -1 = 1 temperature
         self.state += action - 1
-        self.state = self.state.astype('int32')
+        self.state = self.state.astype('float64')
         # print(self.state, self.state.shape)
         # Reduce shower length by 1 second
         self.shower_length -= 1
@@ -71,7 +71,7 @@ class ShowerEnv(Env):
         super().reset(seed=seed)
         # Reset shower temperature
         self.state = 38 + random.randint(-3, 3)
-        self.state = np.array([self.state], dtype='int32')
+        self.state = np.array([self.state], dtype='float64')
         # Reset shower time
         self.shower_length = 60
 
